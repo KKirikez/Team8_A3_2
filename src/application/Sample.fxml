@@ -55,7 +55,7 @@
                            </toggleGroup>
                         </RadioButton>
                         <RadioButton fx:id="nameSort" layoutX="10.0" layoutY="103.0" mnemonicParsing="false" onAction="#sortButtonPressed" text="Name" toggleGroup="$sortButtons" />
-                        <RadioButton fx:id="typeSort" layoutX="11.0" layoutY="130.0" mnemonicParsing="false" onAction="#sortButtonPressed" text="Type" toggleGroup="$sortButtons" />
+                        <RadioButton fx:id="typeSort" layoutX="11.0" layoutY="130.0" mnemonicParsing="false" onAction="#sortButtonPressed" text="Brand" toggleGroup="$sortButtons" />
                         <Button fx:id="purchaseButton" layoutX="14.0" layoutY="421.0" mnemonicParsing="false" onAction="#purchaseButtonPressed" prefHeight="40.0" prefWidth="225.0" text="Purchase!">
                            <font>
                               <Font size="18.0" />

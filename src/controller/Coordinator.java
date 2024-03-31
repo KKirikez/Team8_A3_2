@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import model.*;
 /**
@@ -469,6 +471,27 @@ private static void purchaseToy(String target, String parameterType, Scanner sca
     	    default:
     	        return "Error";
     	}
+    }
+    
+    public static void sortByNum(ListView<Toy> resultsListView) {
+    	List<Toy> numSorted = new ArrayList<>();
+    	numSorted.addAll(toys);
+    	Collections.sort(numSorted, Comparator.comparing(Toy::getSerialNumber));
+    	ToyStoreMenu.drawHomeList(numSorted, resultsListView);
+    }
+    
+    public static void sortByBrand(ListView<Toy> resultsListView) {
+    	List<Toy> brandSorted = new ArrayList<>();
+    	brandSorted.addAll(toys);
+    	Collections.sort(brandSorted, Comparator.comparing(Toy::getBrand));
+		ToyStoreMenu.drawHomeList(brandSorted, resultsListView);
+    }
+    
+    public static void sortByName(ListView<Toy> resultsListView) {
+    	List<Toy> nameSorted = new ArrayList<>();
+    	nameSorted.addAll(toys);
+    	Collections.sort(nameSorted, Comparator.comparing(Toy::getName));
+    	ToyStoreMenu.drawHomeList(nameSorted, resultsListView);
     }
     
     public static void drawHomeList(ListView<Toy> resultsListView) {
