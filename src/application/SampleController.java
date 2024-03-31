@@ -153,15 +153,7 @@ public class SampleController implements Initializable {
         String name = nameInput.getText().trim();
         String type = typeInput.getText().trim();
 
-        // Filter the list based on the conditions provided
-        List<Toy> filteredToys = Coordinator.getToys().stream()
-            .filter(toy -> (serialNum.isEmpty() || toy.getSerialNumber().equals(serialNum)) &&
-                           (name.isEmpty() || toy.getName().toLowerCase().contains(name.toLowerCase())) &&
-                           (type.isEmpty() || toy.getType().equals(type)))
-            .collect(Collectors.toList());
-
-        // Use ToyStoreMenu.drawSearchList to update the UI with the filtered list
-        ToyStoreMenu.drawSearchList(filteredToys, resultsListView);
+       Coordinator.search(serialNum, name, type, resultsListView);
     }
 
     @FXML

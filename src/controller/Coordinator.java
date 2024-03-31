@@ -420,20 +420,42 @@ private static void purchaseToy(String target, String parameterType, Scanner sca
         }
         return matchingToys;
     }
-
-    
-    public static List<Toy> searchToysByName(String name) {
-        System.out.println("Searching for name: " + name);
-        List<Toy> results = compareToys(name, "Name");
-        System.out.println("Found " + results.size() + " results");
-        return results;
+    public static void search(String serialNum, String name, String type, ListView<Toy> resultsListView) {
+    	List<Toy> matches = new ArrayList<>();
+    	 for (Toy toy : toys) { 
+    		 boolean fail = false;
+    		 boolean added = false;
+    		 //kinda dirty but it works
+    		 if(!serialNum.equals("")){
+    			 if(toy.getSerialNumber().contains(serialNum)) {
+    				 matches.add(toy);
+    				 added = true;
+    			 } else {
+    				 fail = true;
+    			 }
+    		 }
+    		 if(!name.equals("")){
+    			 if(toy.getName().contains(name)) {
+    				 matches.add(toy);
+    				 added = true;
+    			 } else {
+    				 fail = true;
+    			 }
+    		 }
+			if(!type.equals("")){
+				if(toy.getType().contains(type)) {
+					matches.add(toy);
+					added = true;
+				}else {
+   				 fail = true;
+   			 }
+			}
+			if(added && fail) {
+				matches.remove(toy);
+			}
+    	 }
+    	 ToyStoreMenu.drawHomeList(matches, resultsListView);
     }
-    
-    public static List<Toy> getToys() {
-        return toys;
-    }
-
-
     /**
      * Determines the type of toy based on the first digit of its serial number.
      * 
