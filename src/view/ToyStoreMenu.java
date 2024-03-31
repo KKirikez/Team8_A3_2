@@ -22,6 +22,6 @@ public class ToyStoreMenu {
 	    removeListView.setItems(items);
 	}
 	public static void drawRecommendList(List<Toy> toDraw) {
-		
+		//toDo
 	}
 }

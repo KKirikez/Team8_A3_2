@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -96,11 +97,12 @@ public class SampleController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	Coordinator.loadToysFromFile();
-        resultsListView.setItems(toys); 
+    	resultsListView.setItems(toys); 
         purchaseButton.setDisable(true);
         resultsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             purchaseButton.setDisable(newSelection == null);
         });
+        Coordinator.sortByNum(resultsListView);
     }
 
     private Toy createToyFromString(String toyString) {
@@ -221,8 +223,10 @@ public class SampleController implements Initializable {
     }
 }
 
-
-
+   @FXML
+   void saveButtonPressed(ActionEvent event) {
+	   Coordinator.saveToysToFile();
+   }
 
 @FXML
 void removeButton(ActionEvent event) {
@@ -247,6 +251,14 @@ void removeButton(ActionEvent event) {
 
     @FXML
     void sortButtonPressed(ActionEvent event) {
-    	
+    	if(serialNumSort.isSelected()) {
+    		Coordinator.sortByNum(resultsListView);    		
+    	}
+    	if(nameSort.isSelected()) {
+    		Coordinator.sortByName(resultsListView);
+    	}
+    	if(typeSort.isSelected()) {
+    		Coordinator.sortByBrand(resultsListView);
+    	}
     }
 }
