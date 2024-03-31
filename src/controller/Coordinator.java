@@ -370,13 +370,7 @@ private static void purchaseToy(String target, String parameterType, Scanner sca
     /**
      * Suggests toys as a gift based on user input criteria.
      */
-    private static void giftSuggestion() {
-    int age = -1;
-    String type = "";
-    float maxPrice = 0;
-    String reply;
-    //get values (passed through)
-    
+    public static void giftSuggestion(int age, String type, double maxPrice,ListView<Toy> recListView) {
     	 List<Toy> acceptableToys = new ArrayList<>();
     	 for (Toy toy : toys) {
     		 if(!(age == -1)) {
@@ -384,19 +378,19 @@ private static void purchaseToy(String target, String parameterType, Scanner sca
     				continue;
     			}
     		}
-    		if(!(type.equals(""))) {
+    		if(!(type.equals("")) && (type.equals("Puzzle") || type.equals("Board Game") || type.equals("Animal") || (type.equals("Figure")))) {
     			if(!(toy.getType().equals(type))) {
     				continue;
     			}
     		}
     		if(!(maxPrice == 0)) {
-    			if(Float.parseFloat(toy.getPrice()) > maxPrice) {
+    			if(Float.parseFloat(toy.getPrice()) >= maxPrice) {
     				continue;
     			}
     		}
     		acceptableToys.add(toy);
     	}
-    	//push list of acceptable toys to be printed
+    	ToyStoreMenu.drawRecommendList(acceptableToys, recListView);
     }
      /**
      * Compares toys based on a given parameter.

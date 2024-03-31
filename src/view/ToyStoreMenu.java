@@ -21,7 +21,8 @@ public class ToyStoreMenu {
 	    ObservableList<Toy> items = FXCollections.observableArrayList(toDraw);
 	    removeListView.setItems(items);
 	}
-	public static void drawRecommendList(List<Toy> toDraw) {
-		//toDo
+	public static void drawRecommendList(List<Toy> toDraw, ListView<Toy> recommendListView) {
+		ObservableList<Toy> items = FXCollections.observableArrayList(toDraw);
+		 recommendListView.setItems(items);
 	}
 }

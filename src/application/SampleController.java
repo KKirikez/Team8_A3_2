@@ -92,6 +92,19 @@ public class SampleController implements Initializable {
     
     @FXML
     private ToggleGroup sortButtons;
+    
+    @FXML
+    private TextField recAge;
+
+    @FXML
+    private ListView<Toy> recListView;
+
+    @FXML
+    private TextField recPrice;
+
+    @FXML
+    private TextField recType;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -262,5 +275,28 @@ void removeButton(ActionEvent event) {
     	if(typeSort.isSelected()) {
     		Coordinator.sortByBrand(resultsListView);
     	}
+    }
+    
+    @FXML
+    void recSearch(ActionEvent event) {
+    	int age = -1;
+    	String type = "";
+    	double maxPrice = 0;
+    	try {
+    		age = Integer.parseInt(recAge.getText());
+    	} catch (Exception e) {
+    		
+    	}
+    	try {
+    		type = recType.getText();
+    	} catch (Exception e) {
+    		
+    	}
+    	try {
+    		maxPrice = Double.parseDouble(recPrice.getText());
+    	} catch (Exception e) {
+    	}
+
+    	Coordinator.giftSuggestion(age,type,maxPrice,recListView);
     }
 }

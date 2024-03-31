@@ -165,7 +165,17 @@
             </Tab>
             <Tab text="Recommend Toy">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="recAge" layoutX="21.0" layoutY="37.0" />
+                        <TextField fx:id="recType" layoutX="21.0" layoutY="79.0" />
+                        <TextField fx:id="recPrice" layoutX="21.0" layoutY="121.0" />
+                        <ListView fx:id="recListView" layoutX="189.0" layoutY="14.0" prefHeight="548.0" prefWidth="547.0" />
+                        <Label layoutX="22.0" layoutY="20.0" text="Childs age" />
+                        <Label layoutX="21.0" layoutY="62.0" text="Childs favourite toy type" />
+                        <Label layoutX="21.0" layoutY="104.0" text="Max price" />
+                        <Button layoutX="22.0" layoutY="165.0" mnemonicParsing="false" onAction="#recSearch" prefHeight="26.0" prefWidth="148.0" text="Search" />
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>
