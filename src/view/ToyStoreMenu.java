@@ -12,18 +12,13 @@ import model.Toy;
  * It provides methods to draw the main menu, search menu, and print a list of acceptable toys.
  */
 public class ToyStoreMenu {
-	public static void drawHomeList(List<Toy> toDraw, ListView<String> resultsListView) {
-	    ObservableList<String> items = FXCollections.observableArrayList();
-	    for (Toy toy : toDraw) {
-	        items.add(toy.toString());
-	    }
+	public static void drawHomeList(List<Toy> toDraw, ListView<Toy> resultsListView) {
+	    ObservableList<Toy> items = FXCollections.observableArrayList(toDraw);
 	    resultsListView.setItems(items);
 	}
-	public static void drawRemoveList(List<Toy> toDraw, ListView<String> removeListView) {
-		ObservableList<String> items = FXCollections.observableArrayList();
-	    for (Toy toy : toDraw) {
-	        items.add(toy.toString());
-	    }
+
+	public static void drawRemoveList(List<Toy> toDraw, ListView<Toy> removeListView) {
+	    ObservableList<Toy> items = FXCollections.observableArrayList(toDraw);
 	    removeListView.setItems(items);
 	}
 	public static void drawRecommendList(List<Toy> toDraw) {

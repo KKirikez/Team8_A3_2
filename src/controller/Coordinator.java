@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import exceptions.MinimumOverMax;
 import exceptions.NegativePrice;
+import javafx.scene.control.ListView;
 import view.ToyStoreMenu;
 import java.io.File;
 import java.io.FileWriter;
@@ -531,6 +532,10 @@ private static void purchaseToy(String target, String parameterType, Scanner sca
     	    default:
     	        return "Error";
     	}
+    }
+    
+    public static void testClass(ListView<Toy> resultsListView) {
+		ToyStoreMenu.drawHomeList(toys, resultsListView);
     }
   
    

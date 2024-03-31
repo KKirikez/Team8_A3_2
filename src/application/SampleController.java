@@ -25,6 +25,7 @@ import controller.Coordinator;
 import java.io.File;
 import java.io.IOException;
 import model.Toy;
+import view.ToyStoreMenu;
 import model.Figures;
 import model.Animals;
 import model.Puzzles;
@@ -125,6 +126,7 @@ public class SampleController implements Initializable {
         serialNumInput.clear();
         nameInput.clear();
         typeInput.clear();
+        Coordinator.testClass(resultsListView);
     }
 
     @FXML
