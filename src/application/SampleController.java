@@ -126,7 +126,7 @@ public class SampleController implements Initializable {
         serialNumInput.clear();
         nameInput.clear();
         typeInput.clear();
-        Coordinator.testClass(resultsListView);
+        Coordinator.drawHomeList(resultsListView);
     }
 
     @FXML

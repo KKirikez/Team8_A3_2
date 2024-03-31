@@ -24,34 +24,7 @@ public class Coordinator {
      * Displays the main menu and handles user input to navigate different functionalities of the toy store application.
      */
     public static void mainMenu() {
-        loadToysFromFile();
-        ToyStoreMenu.drawMainMenu();
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your choice: ");
-        int choice = scanner.nextInt();
-
-        switch (choice) {
-            case 1:
-               searchToys();
-                break;
-            case 2:
-                addToy();
-                break;
-            case 3:
-                removeToy();
-                break;
-            case 4:
-            	giftSuggestion();
-                break;
-            case 5:
-                System.out.println("Thank you for using our app!"); //or something else just as corny
-                saveToysToFile();
-                break;
-            default:
-                System.out.println("Invalid choice. Please enter a number between 1 and 5.\n");
-                mainMenu();
-        }
-        scanner.close();
+       
     }
 /**
      * Loads toys from a file into the application's memory.
@@ -121,7 +94,6 @@ public class Coordinator {
      * Allows the user to search for toys based on various criteria.
      */
     public static void searchToys() {
-        ToyStoreMenu.drawSearchMenu();
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your choice: ");
         int choice = scanner.nextInt();
@@ -397,44 +369,12 @@ private static void purchaseToy(String target, String parameterType, Scanner sca
      * Suggests toys as a gift based on user input criteria.
      */
     private static void giftSuggestion() {
-    Scanner scanner = new Scanner(System.in);
     int age = -1;
     String type = "";
     float maxPrice = 0;
     String reply;
-    System.out.println("Our advanced systems will now determine what type of toy you should buy!");
-    System.out.println("If you are unsure of any answer, leave the answer blank.");
-
-    	try {
-    		System.out.println("What is the gift recipients age: ");
-    		reply = scanner.nextLine();
-    		if(!(reply == "")) {
-    			age = Integer.parseInt(reply);
-    		}
-    	} catch (Exception e) {
-    		System.out.println("Error, invalid age. Try again!");
-    		giftSuggestion();
-    	}
-    	try {
-    		System.out.println("What is the gift recipients favourite toy type: ");
-    		reply = scanner.nextLine();
-    		if(!(reply == "")) {
-    			type = reply;
-    		}
-    	} catch (Exception e) {
-    		System.out.println("Error, invalid toy Type. Try again!");
-    		giftSuggestion();
-    	}
-    	try {
-    		System.out.println("What is Your maximum price: ");
-    		reply = scanner.nextLine();
-    		if(!(reply == "")) {
-    			maxPrice = Float.parseFloat(reply);
-    		}
-    	} catch (Exception e) {
-    		System.out.println("Error, invalid price. Try again!");
-    		giftSuggestion();
-    	}
+    //get values (passed through)
+    
     	 List<Toy> acceptableToys = new ArrayList<>();
     	 for (Toy toy : toys) {
     		 if(!(age == -1)) {
@@ -454,10 +394,7 @@ private static void purchaseToy(String target, String parameterType, Scanner sca
     		}
     		acceptableToys.add(toy);
     	}
-    	System.out.println("Here is a list of the acceptable toys we have found:");
-    	view.ToyStoreMenu.drawPrintList(acceptableToys);
-    	System.out.println("\nFeel free to go to our Inventory and Purchase section to make a purchase!");
-    	mainMenu();
+    	//push list of acceptable toys to be printed
     }
      /**
      * Compares toys based on a given parameter.
@@ -534,8 +471,12 @@ private static void purchaseToy(String target, String parameterType, Scanner sca
     	}
     }
     
-    public static void testClass(ListView<Toy> resultsListView) {
+    public static void drawHomeList(ListView<Toy> resultsListView) {
 		ToyStoreMenu.drawHomeList(toys, resultsListView);
+    }
+    
+    public static void drawRemoveList(ListView<Toy> removeListView) {
+    	ToyStoreMenu.drawRemoveList(toys, removeListView);
     }
   
    
