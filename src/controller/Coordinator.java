@@ -332,15 +332,7 @@ private static boolean isAllDigits(String str) {
 	/**
      * Allows the user to remove a toy from the inventory.
      */
-private static void removeToy() {
-	Scanner scanner = new Scanner(System.in);
-
-    System.out.println("Removing a Toy!");
-
-    System.out.print("Enter Serial Number: ");
-    String serialNumber = scanner.nextLine();
-
-    
+public static void removeToy(String serialNumber) {
     Toy toyToRemove = null;
     for (Toy toy : toys) {
         if (toy.getSerialNumber().equalsIgnoreCase(serialNumber)) {
@@ -353,18 +345,8 @@ private static void removeToy() {
         System.out.println("This Item Found:");
         System.out.println(toyToRemove);
         System.out.print("Do you want to remove it (Y/N)? ");
-        String confirmation = scanner.nextLine();
-
-        if (confirmation.equalsIgnoreCase("Y")) {
-            toys.remove(toyToRemove);
-            System.out.println("Item Removed!"); 
-    } else {
-        System.out.println("Toy with serial number " + serialNumber + " not found.");
-    }
-
-    System.out.println("Press Enter to Continue...");
-    scanner.nextLine();
-    mainMenu();
+        toys.remove(toyToRemove);
+        System.out.println("Item Removed!"); 
     }
 }
 

@@ -93,31 +93,12 @@ public class SampleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadToysFromFile();
+    	Coordinator.loadToysFromFile();
         resultsListView.setItems(toys); 
         purchaseButton.setDisable(true);
         resultsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             purchaseButton.setDisable(newSelection == null);
         });
-    }
-
-    private void loadToysFromFile() {
-        toys.clear();
-        try {
-            File file = new File(FILE_PATH);
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String toyString = scanner.nextLine();
-                Toy toy = createToyFromString(toyString);
-                if (toy != null) {
-                    toys.add(toy);
-                }
-            }
-            scanner.close();
-        } catch (IOException e) {
-            Alert alert = new Alert(AlertType.ERROR, "Failed to load toys from file: " + e.getMessage());
-            alert.showAndWait();
-        }
     }
 
     private Toy createToyFromString(String toyString) {
@@ -186,12 +167,13 @@ public class SampleController implements Initializable {
 
     @FXML
     void removeButton(ActionEvent event) {
-
+    	String serialNumber = removeSearchBox.getText();
+    	Coordinator.removeToy(serialNumber);
     }
 
     @FXML
     void removeSearchButton(ActionEvent event) {
-
+    	
     }
 
     @FXML
