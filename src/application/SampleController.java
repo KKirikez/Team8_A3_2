@@ -225,8 +225,10 @@ public class SampleController implements Initializable {
     }
 }
 
-
-
+   @FXML
+   void saveButtonPressed(ActionEvent event) {
+	   Coordinator.saveToysToFile();
+   }
 
 @FXML
 void removeButton(ActionEvent event) {
