@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import controller.Coordinator;
 
@@ -131,21 +132,18 @@ public class SampleController implements Initializable {
 
     @FXML
     void searchButtonPressed(javafx.event.ActionEvent event) {
-        String serialNum = serialNumInput.getText();
-    	String name = nameInput.getText().trim();
-    	String type = typeInput.getText();
-        
-        if (searchTerm.isEmpty()) {
-            resultsListView.setItems(toys);
-        } else {
-            ObservableList<Toy> filteredToys = FXCollections.observableArrayList();
-            for (Toy toy : toys) {
-                if (toy.getName().toLowerCase().contains(searchTerm.toLowerCase())) {
-                    filteredToys.add(toy);
-                }
-            }
-            resultsListView.setItems(filteredToys);
-        }
+        String serialNum = serialNumInput.getText().trim();
+        String name = nameInput.getText().trim();
+        String type = typeInput.getText().trim();
+
+
+        List<Toy> filteredToys = toys.stream()
+            .filter(toy -> (serialNum.isEmpty() || toy.getSerialNumber().equals(serialNum)) &&
+                           (name.isEmpty() || toy.getName().toLowerCase().contains(name.toLowerCase())) &&
+                           (type.isEmpty() || toy.getType().equals(type)))
+            .collect(Collectors.toList());
+
+        ToyStoreMenu.drawHomeList(filteredToys, resultsListView);
     }
 
     @FXML
