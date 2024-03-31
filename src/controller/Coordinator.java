@@ -488,13 +488,14 @@ private static void purchaseToy(String target, String parameterType, Scanner sca
     	ToyStoreMenu.drawHomeList(nameSorted, resultsListView);
     }
     
-    public static void drawHomeList(ListView<Toy> resultsListView) {
-		ToyStoreMenu.drawHomeList(toys, resultsListView);
+    public static void removeSearch(String id,ListView<Toy> resultsListView) {
+    	List<Toy> mightRemove = new ArrayList<>();
+    	for (Toy toy : toys) { 
+    		if(toy.getSerialNumber().contains(id)) {
+    			 mightRemove.add(toy);
+    	    		System.out.println(toy.getSerialNumber()); 
+    		 }
+    	 }
+    	ToyStoreMenu.drawRemoveList(mightRemove, resultsListView);
     }
-    
-    public static void drawRemoveList(ListView<Toy> removeListView) {
-    	ToyStoreMenu.drawRemoveList(toys, removeListView);
-    }
-  
-   
 }

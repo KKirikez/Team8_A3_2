@@ -142,7 +142,6 @@ public class SampleController implements Initializable {
         serialNumInput.clear();
         nameInput.clear();
         typeInput.clear();
-        Coordinator.drawHomeList(resultsListView);
     }
 
     @FXML
@@ -259,7 +258,13 @@ void removeButton(ActionEvent event) {
 }
     @FXML
     void removeSearchButton(ActionEvent event) {
-    	
+    	String id = "";
+    	try {
+    		id = removeSearchBox.getText();
+    	} catch (Exception e) {
+    		
+    	}
+    	Coordinator.removeSearch(id, removeListView);
     }
 
     @FXML
