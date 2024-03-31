@@ -25,4 +25,10 @@ public class ToyStoreMenu {
 		ObservableList<Toy> items = FXCollections.observableArrayList(toDraw);
 		 recommendListView.setItems(items);
 	}
+	
+	public static void drawSearchList(List<Toy> toDraw, ListView<Toy> searchListView) {
+        ObservableList<Toy> items = FXCollections.observableArrayList(toDraw);
+        searchListView.setItems(items);
+    }
 }
+

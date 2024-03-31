@@ -23,6 +23,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import controller.Coordinator;
+import exceptions.MinimumOverMax;
+import exceptions.NegativePrice;
 
 import java.io.File;
 import java.io.IOException;
@@ -146,18 +148,20 @@ public class SampleController implements Initializable {
 
     @FXML
     void searchButtonPressed(javafx.event.ActionEvent event) {
+        // Retrieve inputs from user interface elements
         String serialNum = serialNumInput.getText().trim();
         String name = nameInput.getText().trim();
         String type = typeInput.getText().trim();
 
-
-        List<Toy> filteredToys = toys.stream()
+        // Filter the list based on the conditions provided
+        List<Toy> filteredToys = Coordinator.getToys().stream()
             .filter(toy -> (serialNum.isEmpty() || toy.getSerialNumber().equals(serialNum)) &&
                            (name.isEmpty() || toy.getName().toLowerCase().contains(name.toLowerCase())) &&
                            (type.isEmpty() || toy.getType().equals(type)))
             .collect(Collectors.toList());
 
-        ToyStoreMenu.drawHomeList(filteredToys, resultsListView);
+        // Use ToyStoreMenu.drawSearchList to update the UI with the filtered list
+        ToyStoreMenu.drawSearchList(filteredToys, resultsListView);
     }
 
     @FXML
