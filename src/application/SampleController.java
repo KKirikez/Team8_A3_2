@@ -165,12 +165,81 @@ public class SampleController implements Initializable {
         }
     }
 
-    @FXML
-    void removeButton(ActionEvent event) {
-    	String serialNumber = removeSearchBox.getText();
-    	Coordinator.removeToy(serialNumber);
-    }
+   @FXML 
+ Void addButton(ActionEvent event) {
+    try {
+        String category = categoryComboBox.getValue();
+        String serialNumber = serialNumberField.getText().trim();
+        String name = nameField.getText().trim();
+        String brand = brandField.getText().trim();
+        float price = Float.parseFloat(priceField.getText().trim());
+        int availableCount = Integer.parseInt(availableCountField.getText().trim());
+        int ageAppropriate = Integer.parseInt(ageAppropriateField.getText().trim());
 
+        if (price < 0) {
+            throw new NegativePrice();
+        }
+
+        Toy newToy = null;
+        switch (category) {
+            case "Figure":
+                String classification = classificationField.getText().trim();
+                newToy = new Figures(serialNumber, name, brand, price, availableCount, ageAppropriate, classification);
+                break;
+            case "Animal":
+                String material = materialField.getText().trim();
+                String size = sizeField.getText().trim();
+                newToy = new Animals(serialNumber, name, brand, price, availableCount, ageAppropriate, material, size);
+                break;
+            case "Puzzle":
+                String type = typeField.getText().trim();
+                newToy = new Puzzles(serialNumber, name, brand, price, availableCount, ageAppropriate, type);
+                break;
+            case "Board Game":
+                int minPlayers = Integer.parseInt(minPlayersField.getText().trim());
+                int maxPlayers = Integer.parseInt(maxPlayersField.getText().trim());
+                if (minPlayers > maxPlayers) {
+                    throw new MinimumOverMax();
+                }
+                String designers = designersField.getText().trim();
+                newToy = new Boardgames(serialNumber, name, brand, price, availableCount, ageAppropriate, minPlayers, maxPlayers, designers);
+                break;
+            default:
+                showAlert("Error", "Please select a valid category.");
+                return;
+        }
+
+        Coordinator.addToy(newToy); 
+        showAlert("Success", "New toy added successfully.");
+        clearAddToyFields();
+    } catch (NegativePrice | MinimumOverMax e) {
+        showAlert("Error", e.getMessage());
+    } catch (NumberFormatException e) {
+        showAlert("Error", "Please enter valid numeric values for price, available count, etc.");
+    } catch (Exception e) {
+        showAlert("Error", "An error occurred: " + e.getMessage());
+    }
+}
+
+
+
+
+@FXML
+void removeButton(ActionEvent event) {
+    String serialNumber = removeSerialNumberField.getText().trim();
+    if (!serialNumber.isEmpty()) {
+        boolean removed = Coordinator.removeToy(serialNumber); 
+        if (removed) {
+            showAlert("Success", "Toy removed successfully.");
+            removeSerialNumberField.clear();
+
+        } else {
+            showAlert("Error", "Toy with serial number " + serialNumber + " not found.");
+        }
+    } else {
+        showAlert("Error", "Please enter a serial number.");
+    }
+}
     @FXML
     void removeSearchButton(ActionEvent event) {
     	
