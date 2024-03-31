@@ -251,7 +251,13 @@ public class SampleController implements Initializable {
 	   if(toRemove == null) {
 		   toRemove = removeListView.getSelectionModel().getSelectedItem();
 	   }
-	   Coordinator.removeToy(toRemove.getSerialNumber());
+	   String id = "";
+	   try {
+   		id = removeSearchBox.getText();
+   		} catch (Exception e) {
+   		
+   		}
+	   Coordinator.removeToy(toRemove.getSerialNumber(), id, removeListView);
 	}
     @FXML
     void removeSearchButton(ActionEvent event) {

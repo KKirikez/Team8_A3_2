@@ -307,7 +307,7 @@ private static boolean isAllDigits(String str) {
 	/**
      * Allows the user to remove a toy from the inventory.
      */
-public static void removeToy(String serialNumber) {
+public static void removeToy(String serialNumber, String id, ListView<Toy> removeListView) {
     Toy toyToRemove = null;
     for (Toy toy : toys) {
         if (toy.getSerialNumber().equalsIgnoreCase(serialNumber)) {
@@ -315,10 +315,11 @@ public static void removeToy(String serialNumber) {
             break;
         }
     }
-
     if (toyToRemove != null) {
-        toys.remove(toyToRemove);
+        System.out.println(serialNumber);
+    	toys.remove(toyToRemove);
     }
+    removeSearch(id, removeListView);
 }
 
 
