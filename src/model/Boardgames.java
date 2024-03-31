@@ -99,8 +99,7 @@ public class Boardgames extends Toy {
     @Override
     public String toString() {
         return super.toString() + 
-                ", Minimum Players: " + getMinPlayers() +
-                ", Max Players: " + getMaxPlayers() +
+                ", Players: " + getMinPlayers() + " - " + getMaxPlayers() +
                 ", Designers: " + getDesigners();
     }
 

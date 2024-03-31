@@ -107,6 +107,16 @@ public class SampleController implements Initializable {
 
     @FXML
     private TextField recType;
+    
+    @FXML
+    private RadioButton remNameSort;
+
+    @FXML
+    private RadioButton remSerialNumSort;
+
+    @FXML
+    private RadioButton remTypeSort;
+
 
 
     @Override
@@ -118,6 +128,7 @@ public class SampleController implements Initializable {
             purchaseButton.setDisable(newSelection == null);
         });
         Coordinator.sortByNum(resultsListView);
+        Coordinator.sortByNum(removeListView);  
     }
 
     private Toy createToyFromString(String toyString) {
@@ -260,6 +271,18 @@ public class SampleController implements Initializable {
     		
     	}
     	Coordinator.removeSearch(id, removeListView);
+    	//I know this is sloppy, but I can't figure out how to make this work and the deadline is coming up
+    	List<Toy> removeListItems = removeListView.getItems();
+    	if(remSerialNumSort.isSelected()) {
+    		Coordinator.sortByNum(removeListView, removeListItems);    		
+    	}
+    	if(remNameSort.isSelected()) {
+    		Coordinator.sortByName(removeListView, removeListItems);
+    	}
+    	if(remTypeSort.isSelected()) {
+    		Coordinator.sortByBrand(removeListView, removeListItems);
+    	}
+    	//sloppy code ends
     }
 
     @FXML
@@ -272,6 +295,20 @@ public class SampleController implements Initializable {
     	}
     	if(typeSort.isSelected()) {
     		Coordinator.sortByBrand(resultsListView);
+    	}
+    }
+
+    @FXML
+    void remSortButtonPressed(ActionEvent event) {
+    	List<Toy> removeListItems = removeListView.getItems();
+    	if(remSerialNumSort.isSelected()) {
+    		Coordinator.sortByNum(removeListView, removeListItems);    		
+    	}
+    	if(remNameSort.isSelected()) {
+    		Coordinator.sortByName(removeListView, removeListItems);
+    	}
+    	if(remTypeSort.isSelected()) {
+    		Coordinator.sortByBrand(removeListView, removeListItems);
     	}
     }
     

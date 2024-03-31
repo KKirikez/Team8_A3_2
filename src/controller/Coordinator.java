@@ -507,6 +507,27 @@ private static void purchaseToy(String target, String parameterType, Scanner sca
     	ToyStoreMenu.drawHomeList(nameSorted, resultsListView);
     }
     
+    public static void sortByNum(ListView<Toy> resultsListView, List<Toy> toSort) {
+    	List<Toy> numSorted = new ArrayList<>();
+    	numSorted.addAll(toSort);
+    	Collections.sort(numSorted, Comparator.comparing(Toy::getSerialNumber));
+    	ToyStoreMenu.drawHomeList(numSorted, resultsListView);
+    }
+    
+    public static void sortByBrand(ListView<Toy> resultsListView, List<Toy> toSort) {
+    	List<Toy> brandSorted = new ArrayList<>();
+    	brandSorted.addAll(toSort);
+    	Collections.sort(brandSorted, Comparator.comparing(Toy::getBrand));
+		ToyStoreMenu.drawHomeList(brandSorted, resultsListView);
+    }
+    
+    public static void sortByName(ListView<Toy> resultsListView, List<Toy> toSort) {
+    	List<Toy> nameSorted = new ArrayList<>();
+    	nameSorted.addAll(toSort);
+    	Collections.sort(nameSorted, Comparator.comparing(Toy::getName));
+    	ToyStoreMenu.drawHomeList(nameSorted, resultsListView);
+    }
+    
     public static void removeSearch(String id,ListView<Toy> resultsListView) {
     	List<Toy> mightRemove = new ArrayList<>();
     	for (Toy toy : toys) { 
