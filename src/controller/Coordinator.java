@@ -493,7 +493,6 @@ private static void purchaseToy(String target, String parameterType, Scanner sca
     	for (Toy toy : toys) { 
     		if(toy.getSerialNumber().contains(id)) {
     			 mightRemove.add(toy);
-    	    		System.out.println(toy.getSerialNumber()); 
     		 }
     	 }
     	ToyStoreMenu.drawRemoveList(mightRemove, resultsListView);
