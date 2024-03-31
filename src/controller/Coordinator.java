@@ -317,11 +317,7 @@ public static void removeToy(String serialNumber) {
     }
 
     if (toyToRemove != null) {
-        System.out.println("This Item Found:");
-        System.out.println(toyToRemove);
-        System.out.print("Do you want to remove it (Y/N)? ");
         toys.remove(toyToRemove);
-        System.out.println("Item Removed!"); 
     }
 }
 

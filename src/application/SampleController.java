@@ -240,22 +240,15 @@ public class SampleController implements Initializable {
 	   Coordinator.saveToysToFile();
    }
 
-@FXML
-void removeButton(ActionEvent event) {
-    String serialNumber = removeSerialNumberField.getText().trim();
-    if (!serialNumber.isEmpty()) {
-        boolean removed = Coordinator.removeToy(serialNumber); 
-        if (removed) {
-            showAlert("Success", "Toy removed successfully.");
-            removeSerialNumberField.clear();
-
-        } else {
-            showAlert("Error", "Toy with serial number " + serialNumber + " not found.");
-        }
-    } else {
-        showAlert("Error", "Please enter a serial number.");
-    }
-}
+   
+   @FXML
+	void removeButton(ActionEvent event) {
+	   Toy toRemove = null;
+	   if(toRemove == null) {
+		   toRemove = removeListView.getSelectionModel().getSelectedItem();
+	   }
+	   Coordinator.removeToy(toRemove.getSerialNumber());
+	}
     @FXML
     void removeSearchButton(ActionEvent event) {
     	String id = "";
