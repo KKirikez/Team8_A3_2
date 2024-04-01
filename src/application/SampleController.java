@@ -188,25 +188,6 @@ public class SampleController implements Initializable {
         categoryComboBox.getItems().addAll("Animal", "Board Game", "Figure", "Puzzle");
     }
 
-    private Toy createToyFromString(String toyString) {
-        String[] toyArray = toyString.split(";");
-        if (toyArray.length < 2) return null;
-        
-        String type = toyArray[1];
-        switch (type) {
-            case "Figure":
-                return new Figures(toyArray[2], toyArray[3], toyArray[4], Float.parseFloat(toyArray[5]), Integer.parseInt(toyArray[6]), Integer.parseInt(toyArray[7]), toyArray[8]);
-            case "Animal":
-                return new Animals(toyArray[2], toyArray[3], toyArray[4], Float.parseFloat(toyArray[5]), Integer.parseInt(toyArray[6]), Integer.parseInt(toyArray[7]), toyArray[8], toyArray[9]);
-            case "Puzzle":
-                return new Puzzles(toyArray[2], toyArray[3], toyArray[4], Float.parseFloat(toyArray[5]), Integer.parseInt(toyArray[6]), Integer.parseInt(toyArray[7]), toyArray[8]);
-            case "Board Game":
-                return new Boardgames(toyArray[2], toyArray[3], toyArray[4], Float.parseFloat(toyArray[5]), Integer.parseInt(toyArray[6]), Integer.parseInt(toyArray[7]), Integer.parseInt(toyArray[8]), Integer.parseInt(toyArray[9]), toyArray[10]);
-            default:
-                return null; 
-        }
-    }
-
     /**
      * Clears the input fields for serial number, name, and type.
      * 
@@ -264,35 +245,52 @@ public class SampleController implements Initializable {
 private Label messageLabel;
 
 @FXML
-void addButton(ActionEvent event) {
-    try {
+void addButtonPressed(ActionEvent event) throws NegativePrice, MinimumOverMax {
+    //universal attributes
+	String category = "";
+    String serialNumber = "";
+    String name = "";
+    String brand = "";
+    float price = 0;
+    int availableCount = 0;
+    int minAge = 0;
+    
+    //attributes for toy types
+    String material = "";
+    String size = "";
+    String classification = "";
+    int minPlayers = 0;
+    int maxPlayers = 0;
+    String designers = "";
+    String puzzleType = "";
+	try {
         // Get the selected type from the ComboBox
-        String category = categoryComboBox.getValue();
+        category = categoryComboBox.getValue();
 
         // Universal attributes
-        String serialNumber = serialNumberField.getText();
-        String name = nameField.getText();
-        String brand = brandField.getText();
-        float price = Float.parseFloat(priceField.getText());
-        int availableCount = Integer.parseInt(availableCountField.getText());
-        int minAge = Integer.parseInt(ageAppropriateField.getText());
+        serialNumber = serialNumberField.getText();
+        name = nameField.getText();
+        brand = brandField.getText();
+        price = Float.parseFloat(priceField.getText());
+        availableCount = Integer.parseInt(availableCountField.getText());
+        minAge = Integer.parseInt(ageAppropriateField.getText());
 
         // Attributes for  toy types
-        String material = materialField.getText();
-        String size = sizeField.getText();
-        String classification = classificationField.getText();
-        int minPlayers = Integer.parseInt(minPlayersField.getText());
-        int maxPlayers = Integer.parseInt(maxPlayersField.getText());
-        String designers = designersField.getText();
-        String puzzleType = typeField.getText();
+        material = materialField.getText();
+        size = sizeField.getText();
+        classification = classificationField.getText();
+        minPlayers = Integer.parseInt(minPlayersField.getText());
+        maxPlayers = Integer.parseInt(maxPlayersField.getText());
+        designers = designersField.getText();
+        puzzleType = typeField.getText();
 
+        
 
-        Coordinator.addToy(category, serialNumber, name, brand, price, availableCount, minAge, classification, material, size, puzzleType, minPlayers, maxPlayers, designers);
-
-       
     } catch (Exception e) {
-    	
+
     }
+	
+	Coordinator.addToy(category, serialNumber, name, brand, price, availableCount, minAge, classification, material, size, puzzleType, minPlayers, maxPlayers, designers);
 }
 
 

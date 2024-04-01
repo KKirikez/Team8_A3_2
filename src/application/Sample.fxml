@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?> 
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -116,7 +116,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Button layoutX="70.0" layoutY="501.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="138.0" text="Add">
+                        <Button fx:id="addButton" layoutX="70.0" layoutY="501.0" mnemonicParsing="false" onAction="#addButtonPressed" prefHeight="56.0" prefWidth="138.0" text="Add">
                            <font>
                               <Font size="24.0" />
                            </font>
