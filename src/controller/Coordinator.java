@@ -478,20 +478,6 @@ public static void removeToy(String serialNumber, String id, ListView<Toy> remov
     	ToyStoreMenu.drawHomeList(numSorted, resultsListView);
     }
     
-    public static void sortByBrand(ListView<Toy> resultsListView) {
-    	List<Toy> brandSorted = new ArrayList<>();
-    	brandSorted.addAll(toys);
-    	Collections.sort(brandSorted, Comparator.comparing(Toy::getBrand));
-		ToyStoreMenu.drawHomeList(brandSorted, resultsListView);
-    }
-    
-    public static void sortByName(ListView<Toy> resultsListView) {
-    	List<Toy> nameSorted = new ArrayList<>();
-    	nameSorted.addAll(toys);
-    	Collections.sort(nameSorted, Comparator.comparing(Toy::getName));
-    	ToyStoreMenu.drawHomeList(nameSorted, resultsListView);
-    }
-    
     public static void sortByNum(ListView<Toy> resultsListView, List<Toy> toSort) {
     	List<Toy> numSorted = new ArrayList<>();
     	numSorted.addAll(toSort);
