@@ -213,39 +213,41 @@ public static void addToy(String type, String serialNumber, String name, String 
     	System.out.println("Not all digits");
     }
     
+    boolean flag = false;
     for (Toy toy : toys) {
         if (toy.getSerialNumber().equals(serialNumber)) {
         	System.out.println("Already Exists");
-        	break;
+        	flag = true;
         }
     }
-    Toy toy;
-    switch (type) {
-        case "Figure":
-            toy = new Figures(serialNumber, name, brand, price, availableCount, ageAppropriate, classification);
-//           ToyStoreMenu.drawAddError("Added Figure!", addError);
-            break;
-        case "Animal":
-            toy = new Animals(serialNumber, name, brand, price, availableCount, ageAppropriate, material, size);
-//            ToyStoreMenu.drawAddError("Added Animal!", addError);
-            break;
-        case "Puzzle":
-            toy = new Puzzles(serialNumber, name, brand, price, availableCount, ageAppropriate, puzzleType);
-//            ToyStoreMenu.drawAddError("Added Puzzle!", addError);
-            break;
-        case "Board Game":
-            if (minPlayers > maxPlayers) {
-                throw new MinimumOverMax();
-            }
-            toy = new Boardgames(serialNumber, name, brand, price, availableCount, ageAppropriate, minPlayers, maxPlayers, designers);
-//            ToyStoreMenu.drawAddError("Added Board Game!", addError);
-            break;
-        default:
-            throw new IllegalArgumentException("Invalid toy type based on serial number.");
+    if(!flag) {
+    	Toy toy;
+        switch (type) {
+            case "Figure":
+                toy = new Figures(serialNumber, name, brand, price, availableCount, ageAppropriate, classification);
+//               ToyStoreMenu.drawAddError("Added Figure!", addError);
+                break;
+            case "Animal":
+                toy = new Animals(serialNumber, name, brand, price, availableCount, ageAppropriate, material, size);
+//                ToyStoreMenu.drawAddError("Added Animal!", addError);
+                break;
+            case "Puzzle":
+                toy = new Puzzles(serialNumber, name, brand, price, availableCount, ageAppropriate, puzzleType);
+//                ToyStoreMenu.drawAddError("Added Puzzle!", addError);
+                break;
+            case "Board Game":
+                if (minPlayers > maxPlayers) {
+                    throw new MinimumOverMax();
+                }
+                toy = new Boardgames(serialNumber, name, brand, price, availableCount, ageAppropriate, minPlayers, maxPlayers, designers);
+//                ToyStoreMenu.drawAddError("Added Board Game!", addError);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid toy type based on serial number.");
+        }
+        toys.add(toy);
     }
 
-   
-    toys.add(toy);
 }
 
 /**
