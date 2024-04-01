@@ -317,12 +317,8 @@ void addButtonPressed(ActionEvent event) throws NegativePrice, MinimumOverMax {
    @FXML
 	void removeButton(ActionEvent event) {
 	   Toy toRemove = null;
-	   if(toRemove == null) {
-		   try {
-			   toRemove = removeListView.getSelectionModel().getSelectedItem();
-		   } catch (Exception e) {
-			   
-		   }
+	   if(toRemove == null) {  
+		 toRemove = removeListView.getSelectionModel().getSelectedItem();
 	   }
 	   String id = "";
 	   try {
@@ -330,7 +326,11 @@ void addButtonPressed(ActionEvent event) throws NegativePrice, MinimumOverMax {
    		} catch (Exception e) {
    		
    		}
+	   try {
 	   Coordinator.removeToy(toRemove.getSerialNumber(), id, removeListView);
+	   } catch (Exception e) {
+		   
+	   }
 	}
     /**
      * Event handler for the removeSearchButton.
