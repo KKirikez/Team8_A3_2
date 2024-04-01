@@ -258,60 +258,39 @@ public class SampleController implements Initializable {
  * @param event The action event triggered by clicking the add button.
  */
    @FXML 
- Void addButton(ActionEvent event) {
+@FXML
+private Label messageLabel;
+
+@FXML
+void addButton(ActionEvent event) {
     try {
+        // Get the selected type from the ComboBox
         String category = categoryComboBox.getValue();
-        String serialNumber = serialNumberField.getText().trim();
-        String name = nameField.getText().trim();
-        String brand = brandField.getText().trim();
-        float price = Float.parseFloat(priceField.getText().trim());
-        int availableCount = Integer.parseInt(availableCountField.getText().trim());
-        int ageAppropriate = Integer.parseInt(ageAppropriateField.getText().trim());
 
-        if (price < 0) {
-            throw new NegativePrice();
-        }
+        // Universal attributes
+        String serialNumber = serialNumberField.getText();
+        String name = nameField.getText();
+        String brand = brandField.getText();
+        double price = Double.parseDouble(priceField.getText());
+        int availableCount = Integer.parseInt(availableCountField.getText());
+        int minAge = Integer.parseInt(ageAppropriateField.getText());
 
-        Toy newToy = null;
-        switch (category) {
-            case "Figure":
-                String classification = classificationField.getText().trim();
-                newToy = new Figures(serialNumber, name, brand, price, availableCount, ageAppropriate, classification);
-                break;
-            case "Animal":
-                String material = materialField.getText().trim();
-                String size = sizeField.getText().trim();
-                newToy = new Animals(serialNumber, name, brand, price, availableCount, ageAppropriate, material, size);
-                break;
-            case "Puzzle":
-                String type = typeField.getText().trim();
-                newToy = new Puzzles(serialNumber, name, brand, price, availableCount, ageAppropriate, type);
-                break;
-            case "Board Game":
-                int minPlayers = Integer.parseInt(minPlayersField.getText().trim());
-                int maxPlayers = Integer.parseInt(maxPlayersField.getText().trim());
-                if (minPlayers > maxPlayers) {
-                    throw new MinimumOverMax();
-                }
-                String designers = designersField.getText().trim();
-                newToy = new Boardgames(serialNumber, name, brand, price, availableCount, ageAppropriate, minPlayers, maxPlayers, designers);
-                break;
-            default:
-                showAlert("Error", "Please select a valid category.");
-                return;
-        }
+        // Attributes for  toy types
+        String material = materialField.getText();
+        String size = sizeField.getText();
+        String classification = classificationField.getText();
+        int minPlayers = Integer.parseInt(minPlayersField.getText());
+        int maxPlayers = Integer.parseInt(maxPlayersField.getText());
+        String designers = designersField.getText();
+        String puzzleType = typeField.getText();
 
-        Coordinator.addToy(newToy); 
-        showAlert("Success", "New toy added successfully.");
-        clearAddToyFields();
-    } catch (NegativePrice | MinimumOverMax e) {
-        showAlert("Error", e.getMessage());
-    } catch (NumberFormatException e) {
-        showAlert("Error", "Please enter valid numeric values for price, available count, etc.");
-    } catch (Exception e) {
-        showAlert("Error", "An error occurred: " + e.getMessage());
-    }
+     
+        Coordinator.addToy(category, serialNumber, name, brand, price, availableCount, minAge, classification, material, size, puzzleType, minPlayers, maxPlayers, designers);
+
+       
+    } catch (Exception e) 
 }
+
 
 /**
     * Handles the event when the save button is pressed.
