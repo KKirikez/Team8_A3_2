@@ -172,8 +172,6 @@ public class SampleController implements Initializable {
     	Coordinator.loadToysFromFile();
     	resultsListView.setItems(toys); 
         purchaseButton.setDisable(true);
-        ObservableList<String> categories = FXCollections.observableArrayList("Animals", "Figures", "Board Games", "Puzzles");
-        categoryComboBox.setItems(categories);
         resultsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             purchaseButton.setDisable(newSelection == null);
         });
@@ -219,20 +217,11 @@ public class SampleController implements Initializable {
 
     @FXML
     void purchaseButtonPressed(javafx.event.ActionEvent event) {
-        Toy selectedToy = listView.getSelectionModel().getSelectedItem();
+        Toy selectedToy = resultsListView.getSelectionModel().getSelectedItem();
         if (selectedToy != null) {
-            Alert confirmationAlert = new Alert(AlertType.CONFIRMATION, "Do you want to purchase " + selectedToy.getName() + "?", ButtonType.YES, ButtonType.NO);
-            confirmationAlert.showAndWait().ifPresent(response -> {
-                if (response == ButtonType.YES) {
-                    selectedToy.setAvailableCount(selectedToy.getAvailableCount() - 1);
-                    if (selectedToy.getAvailableCount() <= 0) {
-                        toys.remove(selectedToy);
-                    }
-                    Alert infoAlert = new Alert(AlertType.INFORMATION, "The Transaction Successfully Terminated!");
-                    infoAlert.showAndWait();
-                    listView.refresh(); 
-                }
-            });
+            Coordinator.purchaseToyGUI(selectedToy);
+            
+            resultsListView.refresh();
         }
     }
 

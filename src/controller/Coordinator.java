@@ -181,6 +181,21 @@ public class Coordinator {
         }
     }
     
+    public static void purchaseToyGUI(Toy toyToPurchase) {
+        if (toyToPurchase == null) {
+            System.err.println("The toy to purchase is null. Operation aborted.");
+            return;
+        }
+
+        int newAvailableCount = toyToPurchase.getAvailableCount() - 1;
+        toyToPurchase.setAvailableCount(newAvailableCount);
+
+        // Remove the toy from the list if it's no longer available
+        if (newAvailableCount <= 0) {
+        }
+    }
+
+    
  /**
      * Allows the user to add a new toy to the inventory.
      */
