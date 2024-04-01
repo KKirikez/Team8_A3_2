@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -18,6 +19,7 @@ import javafx.scene.control.ToggleGroup;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale.Category;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -26,6 +28,7 @@ import controller.Coordinator;
 import exceptions.MinimumOverMax;
 import exceptions.NegativePrice;
 
+import java.awt.Label;
 import java.io.File;
 import java.io.IOException;
 import model.Toy;
@@ -46,56 +49,50 @@ public class SampleController implements Initializable {
     private static ObservableList<Toy> toys = FXCollections.observableArrayList();
 
     @FXML
+    private TextField ageAppropriateField;
+
+    @FXML
+    private TextField availableCountField;
+
+    @FXML
+    private TextField brandField;
+
+    @FXML
+    private ComboBox<Category> categoryComboBox;
+
+    @FXML
+    private TextField classificationField;
+
+    @FXML
     private Button clearButton;
 
     @FXML
-    private ListView<Toy> listView;
+    private TextField designersField;
+
+    @FXML
+    private TextField materialField;
+
+    @FXML
+    private TextField maxPlayersField;
+
+    @FXML
+    private TextField minPlayersField;
+
+    @FXML
+    private TextField nameField;
 
     @FXML
     private TextField nameInput;
 
     @FXML
-    private Button removeButton;
-
-    @FXML
-    private ListView<Toy> removeListView; 
-
-    @FXML
-    private TextField removeSearchBox;
-
-    @FXML
-    private Button removeSearchButton;
-
-    @FXML
-    private javafx.scene.control.Label removeYouSure;
-
-    @FXML
-    private ListView<Toy> resultsListView;
-
-    @FXML
-    private Button searchButton;
-
-    @FXML
-    private TextField serialNumInput;
-    
-    @FXML
-    private TextField typeInput;
-    
-    @FXML
-    private Button purchaseButton; 
-    
-    @FXML
     private RadioButton nameSort;
-    
+
     @FXML
-    private RadioButton serialNumSort;
-    
+    private TextField priceField;
+
     @FXML
-    private RadioButton typeSort;
-    
-    @FXML
-    private ToggleGroup sortButtons;
-    
+    private Button purchaseButton;
+
     @FXML
     private TextField recAge;
 
@@ -107,7 +104,7 @@ public class SampleController implements Initializable {
 
     @FXML
     private TextField recType;
-    
+
     @FXML
     private RadioButton remNameSort;
 
@@ -117,6 +114,57 @@ public class SampleController implements Initializable {
     @FXML
     private RadioButton remTypeSort;
 
+    @FXML
+    private Button removeButton;
+
+    @FXML
+    private ListView<Toy> removeListView;
+
+    @FXML
+    private TextField removeSearchBox;
+
+    @FXML
+    private Button removeSearchButton;
+
+    @FXML
+    private Label removeYouSure;
+
+    @FXML
+    private ListView<Toy> resultsListView;
+
+    @FXML
+    private Button saveButton;
+
+    @FXML
+    private Button searchButton;
+
+    @FXML
+    private TextField serialNumInput;
+
+    @FXML
+    private RadioButton serialNumSort;
+
+    @FXML
+    private TextField serialNumberField;
+
+    @FXML
+    private TextField sizeField;
+
+    @FXML
+    private ToggleGroup sortButtons;
+
+    @FXML
+    private ToggleGroup sortButtonsRemove;
+
+    @FXML
+    private TextField typeField;
+
+    @FXML
+    private TextField typeInput;
+
+    @FXML
+    private RadioButton typeSort;
+
 
 
     @Override
@@ -124,6 +172,8 @@ public class SampleController implements Initializable {
     	Coordinator.loadToysFromFile();
     	resultsListView.setItems(toys); 
         purchaseButton.setDisable(true);
+        ObservableList<String> categories = FXCollections.observableArrayList("Animals", "Figures", "Board Games", "Puzzles");
+        categoryComboBox.setItems(categories);
         resultsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             purchaseButton.setDisable(newSelection == null);
         });
