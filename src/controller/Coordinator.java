@@ -199,110 +199,47 @@ public class Coordinator {
  /**
      * Allows the user to add a new toy to the inventory.
      */
-private static void addToy() {
-    Scanner scanner = new Scanner(System.in);
-    System.out.println("Adding a new Toy!");
-
-    System.out.print("Enter Serial Number: ");
-    String serialNumber = scanner.nextLine();
-
-
+public static void addToy(String serialNumber, String name, String brand, float price, int availableCount, int ageAppropriate, String classification, String material, String size, String puzzleType, int minPlayers, int maxPlayers, String designers) throws NegativePrice, MinimumOverMax {
+    
     if (serialNumber.length() != 10) {
-        System.out.println("Invalid serial number. It must be 10 digits long.");
-        scanner.close();
-        return;
+        throw new IllegalArgumentException("Invalid serial number. It must be 10 digits long.");
     }
+   
     if (!isAllDigits(serialNumber)) {
-        System.out.println("Invalid serial number. It must contain only numbers.");
-        scanner.close();
-        return;
-    }   
+        throw new IllegalArgumentException("Invalid serial number. It must contain only numbers.");
+    }
+    
     for (Toy toy : toys) {
         if (toy.getSerialNumber().equals(serialNumber)) {
-            System.out.println("Serial number already exists. Please enter a unique serial number.");
-            return;
+            throw new IllegalArgumentException("Serial number already exists. Please enter a unique serial number.");
         }
     }
 
-    
+  
     String type = getType(serialNumber);
-    if ("Error".equals(type)) {
-        System.out.println("Invalid serial number. First digit must be between 0 and 9.");
-        addToy();
-        return;
-    }
-
-    System.out.print("Enter Toy Name: ");
-    String name = scanner.nextLine();
-
-    System.out.print("Enter Toy Brand: ");
-    String brand = scanner.nextLine();
-
-    System.out.print("Enter Toy Price: ");
-    float price = Float.parseFloat(scanner.nextLine());
-    try {
-    	if (price < 0) {
-        	throw new NegativePrice();
-    	}
-    } catch (NegativePrice e) {
-    	e.printStackTrace();
-    }
-
-    System.out.print("Enter Available Count: ");
-    int availableCount = scanner.nextInt();
-
-    System.out.print("Enter Appropriate Age: ");
-    int ageAppropriate = scanner.nextInt();
-    scanner.nextLine();  
-
-    Toy toy = null;
+    Toy toy;
     switch (type) {
         case "Figure":
-            System.out.print("Enter Classification (Action, Doll, Historic): ");
-            String classification = scanner.nextLine();
-            toy  = new Figures(serialNumber, name, brand, price, availableCount, ageAppropriate, classification);
+            toy = new Figures(serialNumber, name, brand, price, availableCount, ageAppropriate, classification);
             break;
         case "Animal":
-            System.out.print("Enter Material: ");
-            String material = scanner.nextLine();
-            System.out.print("Enter Size (Small, Medium, Large): ");
-            String size = scanner.nextLine();
             toy = new Animals(serialNumber, name, brand, price, availableCount, ageAppropriate, material, size);
             break;
         case "Puzzle":
-            System.out.print("Enter Puzzle Type (Mechanical, Cryptic, Logic, Trivia, Riddle): ");
-            String puzzleType = scanner.nextLine();
             toy = new Puzzles(serialNumber, name, brand, price, availableCount, ageAppropriate, puzzleType);
             break;
         case "Board Game":
-           System.out.print("Enter Minimum Number of Players: ");
-            int minPlayers = scanner.nextInt();
-            System.out.print("Enter Maximum Number of Players: ");
-            int maxPlayers = scanner.nextInt();
-            try {
-            	if (minPlayers > maxPlayers) {
-                	throw new MinimumOverMax();
-            	}
-            } catch (MinimumOverMax e) {
-                e.printStackTrace();
+            if (minPlayers > maxPlayers) {
+                throw new MinimumOverMax();
             }
-            scanner.nextLine(); 
-            System.out.print("Enter Designer(s): ");
-            String designers = scanner.nextLine();
             toy = new Boardgames(serialNumber, name, brand, price, availableCount, ageAppropriate, minPlayers, maxPlayers, designers);
             break;
         default:
-            System.out.println("Invalid toy type.");
-            return;
+            throw new IllegalArgumentException("Invalid toy type based on serial number.");
     }
 
+   
     toys.add(toy);
-    System.out.println("New toy added successfully!");
-
-	System.out.println("Press Enter to continue...");
-    scanner.nextLine(); 
-
-	mainMenu();
 }
 
 /**
