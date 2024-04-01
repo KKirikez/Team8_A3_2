@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.AnchorPane?> 
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -121,7 +121,8 @@
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <ComboBox fx:id="categoryComboBox" layoutX="115.0" layoutY="55.0" prefWidth="150.0" visibleRowCount="4" />
+                        <ComboBox fx:id="categoryComboBox" layoutX="115.0" layoutY="55.0" prefWidth="150.0" visibleRowCount="4">
+                        </ComboBox>                      
                         <TextField fx:id="serialNumberField" layoutX="116.0" layoutY="90.0" />
                         <TextField fx:id="nameField" layoutX="116.0" layoutY="121.0" />
                         <TextField fx:id="brandField" layoutX="116.0" layoutY="152.0" />

@@ -257,7 +257,7 @@ public class SampleController implements Initializable {
  *
  * @param event The action event triggered by clicking the add button.
  */
-   @FXML 
+
 @FXML
 private Label messageLabel;
 
@@ -271,7 +271,7 @@ void addButton(ActionEvent event) {
         String serialNumber = serialNumberField.getText();
         String name = nameField.getText();
         String brand = brandField.getText();
-        double price = Double.parseDouble(priceField.getText());
+        float price = Float.parseFloat(priceField.getText());
         int availableCount = Integer.parseInt(availableCountField.getText());
         int minAge = Integer.parseInt(ageAppropriateField.getText());
 
@@ -284,11 +284,13 @@ void addButton(ActionEvent event) {
         String designers = designersField.getText();
         String puzzleType = typeField.getText();
 
-     
+
         Coordinator.addToy(category, serialNumber, name, brand, price, availableCount, minAge, classification, material, size, puzzleType, minPlayers, maxPlayers, designers);
 
        
-    } catch (Exception e) 
+    } catch (Exception e) {
+    	
+    }
 }
 
 

@@ -199,7 +199,7 @@ public class Coordinator {
  /**
      * Allows the user to add a new toy to the inventory.
      */
-public static void addToy(String serialNumber, String name, String brand, float price, int availableCount, int ageAppropriate, String classification, String material, String size, String puzzleType, int minPlayers, int maxPlayers, String designers) throws NegativePrice, MinimumOverMax {
+public static void addToy(String type, String serialNumber, String name, String brand, float price, int availableCount, int ageAppropriate, String classification, String material, String size, String puzzleType, int minPlayers, int maxPlayers, String designers) throws NegativePrice, MinimumOverMax {
     
     if (serialNumber.length() != 10) {
         throw new IllegalArgumentException("Invalid serial number. It must be 10 digits long.");
@@ -215,7 +215,6 @@ public static void addToy(String serialNumber, String name, String brand, float 
         }
     }
 
-  
     
     Toy toy;
     switch (type) {
