@@ -249,46 +249,31 @@ public class SampleController implements Initializable {
         }
     }
 
-   @FXML 
 @FXML
 void addButton(ActionEvent event) {
-    try {
-        
-        String category = categoryComboBox.getValue();
-        String serialNumber = serialNumberField.getText().trim();
-        String name = nameField.getText().trim();
-        String brand = brandField.getText().trim();
-        float price = Float.parseFloat(priceField.getText().trim());
-        int availableCount = Integer.parseInt(availableCountField.getText().trim());
-        int ageAppropriate = Integer.parseInt(ageAppropriateField.getText().trim());
-
-     
-        String classification = classificationField.getText().trim(); 
-        String material = materialField.getText().trim();             
-        String size = sizeField.getText().trim();                    
-        String puzzleType = typeField.getText().trim();              
-        int minPlayers = Integer.parseInt(minPlayersField.getText().trim()); 
-        int maxPlayers = Integer.parseInt(maxPlayersField.getText().trim()); 
-        String designers = designersField.getText().trim();          s
-
-       
-        Coordinator.addToy(serialNumber, name, brand, price, availableCount, ageAppropriate, classification, material, size, puzzleType, minPlayers, maxPlayers, designers);
-
-     
-        showAlert("Success", "New toy added successfully.");
-
-
-
-    } catch (NegativePrice | MinimumOverMax | IllegalArgumentException e) {
-       
-        showAlert("Error", e.getMessage());
-    } catch (NumberFormatException e) {
+    //Universal    
+	String serialNumber = serialNumberField.getText();
+    String name = nameField.getText();
+    String brand = brandField.getText();
+    double price = Double.parseDouble(priceField.getText());
+    int availableCount = Integer.parseInt(availableCountField.getText());
+    int minAge = Integer.parseInt(ageAppropriateField.getText());
     
-        showAlert("Error", "Please enter valid numeric values for price, available count, minimum players, maximum players, and age.");
-    } catch (Exception e) {
-      
-        showAlert("Error", "An unexpected error occurred: " + e.getMessage());
-    }
+    //animal
+    String material = materialField.getText();
+    String size = sizeField.getText();
+    
+    //figure
+    String classification = classificationField.getText();
+    
+    //boardGame
+    int minPlayers = Integer.parseInt(minPlayersField.getText());
+    int maxPlaters = Integer.parseInt(maxPlayersField.getText());
+    String designers = designersField.getText();
+    
+    //puzzle
+    String type = typeField.getText();
+    
 }
 
    @FXML
