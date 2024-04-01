@@ -324,7 +324,18 @@ public class SampleController implements Initializable {
    		
    		}
 	   Coordinator.removeToy(toRemove.getSerialNumber(), id, removeListView);
+	   List<Toy> removeListItems = removeListView.getItems();
+	   if(remSerialNumSort.isSelected()) {
+   		Coordinator.sortByNum(removeListView, removeListItems);    		
+   		}
+	   if(remNameSort.isSelected()) {
+   			Coordinator.sortByName(removeListView, removeListItems);
+	   }
+   		if(remTypeSort.isSelected()) {
+   			Coordinator.sortByBrand(removeListView, removeListItems);
+   		}
 	}
+   
     @FXML
     void removeSearchButton(ActionEvent event) {
     	String id = "";
@@ -368,12 +379,15 @@ public class SampleController implements Initializable {
     	List<Toy> removeListItems = removeListView.getItems();
     	if(remSerialNumSort.isSelected()) {
     		Coordinator.sortByNum(removeListView, removeListItems);    		
+    		System.out.println("Num");
     	}
     	if(remNameSort.isSelected()) {
     		Coordinator.sortByName(removeListView, removeListItems);
+    		System.out.println("name");
     	}
     	if(remTypeSort.isSelected()) {
     		Coordinator.sortByBrand(removeListView, removeListItems);
+    		System.out.println("brand");
     	}
     }
     
