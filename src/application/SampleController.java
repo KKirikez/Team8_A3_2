@@ -58,7 +58,7 @@ public class SampleController implements Initializable {
     private TextField brandField;
 
     @FXML
-    private ComboBox<Category> categoryComboBox;
+    private ComboBox<String> categoryComboBox;
 
     @FXML
     private TextField classificationField;
@@ -174,7 +174,7 @@ public class SampleController implements Initializable {
      * @param location  The location used to resolve relative paths for the root object, or null if the location is not known.
      * @param resources The resources used to localize the root object, or null if the root object was not localized.
      */
-    @Override
+    @Override    
     public void initialize(URL location, ResourceBundle resources) {
     	Coordinator.loadToysFromFile();
     	resultsListView.setItems(toys); 
@@ -184,6 +184,8 @@ public class SampleController implements Initializable {
         });
         Coordinator.sortByNum(resultsListView);
         Coordinator.sortByNum(removeListView);  
+        
+        categoryComboBox.getItems().addAll("Animal", "Board Game", "Figure", "Puzzle");
     }
 
     private Toy createToyFromString(String toyString) {
