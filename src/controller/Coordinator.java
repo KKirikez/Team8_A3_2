@@ -216,7 +216,7 @@ public static void addToy(String serialNumber, String name, String brand, float 
     }
 
   
-    String type = getType(serialNumber);
+    
     Toy toy;
     switch (type) {
         case "Figure":
