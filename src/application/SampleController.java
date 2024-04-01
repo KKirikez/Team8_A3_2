@@ -167,6 +167,13 @@ public class SampleController implements Initializable {
 
 
 
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * This method is automatically called by the FXMLLoader.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	Coordinator.loadToysFromFile();
@@ -198,47 +205,39 @@ public class SampleController implements Initializable {
         }
     }
 
+    /**
+     * Clears the input fields for serial number, name, and type.
+     * 
+     * @param event the action event triggered by the clear button
+     */
     @FXML
     void clearButtonPressed(javafx.event.ActionEvent event) {
         serialNumInput.clear();
         nameInput.clear();
         typeInput.clear();
-      //sloppy again, but it works!
-    	if(serialNumSort.isSelected()) {
-    		Coordinator.sortByNum(resultsListView);    		
-    	}
-    	if(nameSort.isSelected()) {
-    		Coordinator.sortByName(resultsListView);
-    	}
-    	if(typeSort.isSelected()) {
-    		Coordinator.sortByBrand(resultsListView);
-    	}
-    	//sloppy code ends
     }
 
+    /**
+     * Event handler for the search button.
+     * Retrieves inputs from user interface elements and performs a search using the Coordinator class.
+     * 
+     * @param event The action event triggered by the search button.
+     */
     @FXML
     void searchButtonPressed(javafx.event.ActionEvent event) {
         // Retrieve inputs from user interface elements
         String serialNum = serialNumInput.getText().trim();
         String name = nameInput.getText().trim();
         String type = typeInput.getText().trim();
-        if(!(serialNum.equals("") && name.equals("") && type.equals(""))) {
-        	Coordinator.search(serialNum, name, type, resultsListView);
-        } else {
-        	//sloppy again, but it works!
-        	if(remSerialNumSort.isSelected()) {
-        		Coordinator.sortByNum(resultsListView);    		
-        	}
-        	if(remNameSort.isSelected()) {
-        		Coordinator.sortByName(resultsListView);
-        	}
-        	if(remTypeSort.isSelected()) {
-        		Coordinator.sortByBrand(resultsListView);
-        	}
-        	//sloppy code ends
-        }
+
+       Coordinator.search(serialNum, name, type, resultsListView);
     }
 
+    /**
+     * Event handler for the purchase button.
+     * 
+     * @param event The action event triggered by the button press.
+     */
     @FXML
     void purchaseButtonPressed(javafx.event.ActionEvent event) {
         Toy selectedToy = resultsListView.getSelectionModel().getSelectedItem();
@@ -249,47 +248,90 @@ public class SampleController implements Initializable {
         }
     }
 
-
-
-@FXML
-void addButton(ActionEvent event) {
+/**
+ * This method is called when the add button is clicked.
+ * It retrieves the values from the input fields, validates them, and creates a new toy object based on the selected category.
+ * The new toy object is then added to the Coordinator class.
+ * If any validation errors occur or an exception is thrown, an error message is displayed.
+ * After adding the toy, the input fields are cleared.
+ *
+ * @param event The action event triggered by clicking the add button.
+ */
+   @FXML 
+ Void addButton(ActionEvent event) {
     try {
-        // Get the selected type from the ComboBox
         String category = categoryComboBox.getValue();
+        String serialNumber = serialNumberField.getText().trim();
+        String name = nameField.getText().trim();
+        String brand = brandField.getText().trim();
+        float price = Float.parseFloat(priceField.getText().trim());
+        int availableCount = Integer.parseInt(availableCountField.getText().trim());
+        int ageAppropriate = Integer.parseInt(ageAppropriateField.getText().trim());
 
-        // Universal attributes
-        String serialNumber = serialNumberField.getText();
-        String name = nameField.getText();
-        String brand = brandField.getText();
-        double price = Double.parseDouble(priceField.getText());
-        int availableCount = Integer.parseInt(availableCountField.getText());
-        int minAge = Integer.parseInt(ageAppropriateField.getText());
+        if (price < 0) {
+            throw new NegativePrice();
+        }
 
-        // Attributes for toy types
-        String material = materialField.getText();
-        String size = sizeField.getText();
-        String classification = classificationField.getText();
-        int minPlayers = Integer.parseInt(minPlayersField.getText());
-        int maxPlayers = Integer.parseInt(maxPlayersField.getText());
-        String designers = designersField.getText();
-        String puzzleType = typeField.getText();
+        Toy newToy = null;
+        switch (category) {
+            case "Figure":
+                String classification = classificationField.getText().trim();
+                newToy = new Figures(serialNumber, name, brand, price, availableCount, ageAppropriate, classification);
+                break;
+            case "Animal":
+                String material = materialField.getText().trim();
+                String size = sizeField.getText().trim();
+                newToy = new Animals(serialNumber, name, brand, price, availableCount, ageAppropriate, material, size);
+                break;
+            case "Puzzle":
+                String type = typeField.getText().trim();
+                newToy = new Puzzles(serialNumber, name, brand, price, availableCount, ageAppropriate, type);
+                break;
+            case "Board Game":
+                int minPlayers = Integer.parseInt(minPlayersField.getText().trim());
+                int maxPlayers = Integer.parseInt(maxPlayersField.getText().trim());
+                if (minPlayers > maxPlayers) {
+                    throw new MinimumOverMax();
+                }
+                String designers = designersField.getText().trim();
+                newToy = new Boardgames(serialNumber, name, brand, price, availableCount, ageAppropriate, minPlayers, maxPlayers, designers);
+                break;
+            default:
+                showAlert("Error", "Please select a valid category.");
+                return;
+        }
 
-        Coordinator.addToy(category, serialNumber, name, brand, price, availableCount, minAge, classification, material, size, puzzleType, minPlayers, maxPlayers, designers);
-
-   
-
-    } catch (Exception e) 
-      
-
-    
+        Coordinator.addToy(newToy); 
+        showAlert("Success", "New toy added successfully.");
+        clearAddToyFields();
+    } catch (NegativePrice | MinimumOverMax e) {
+        showAlert("Error", e.getMessage());
+    } catch (NumberFormatException e) {
+        showAlert("Error", "Please enter valid numeric values for price, available count, etc.");
+    } catch (Exception e) {
+        showAlert("Error", "An error occurred: " + e.getMessage());
+    }
 }
 
+/**
+    * Handles the event when the save button is pressed.
+    * Calls the `saveToysToFile` method in the `Coordinator` class to save toys to a file.
+    *
+    * @param event the action event triggered by the save button
+    */
    @FXML
    void saveButtonPressed(ActionEvent event) {
 	   Coordinator.saveToysToFile();
    }
 
-   
+/**
+ * Event handler for the removeButton.
+ * Removes a selected toy from the removeListView.
+ * If a toy is not selected, it tries to remove a toy based on the provided id from the removeSearchBox.
+ * Calls the Coordinator's removeToy method to remove the toy from the system.
+ * 
+ * @param event The action event triggered by clicking the removeButton.
+ */
    @FXML
 	void removeButton(ActionEvent event) {
 	   Toy toRemove = null;
@@ -303,18 +345,13 @@ void addButton(ActionEvent event) {
    		
    		}
 	   Coordinator.removeToy(toRemove.getSerialNumber(), id, removeListView);
-	   List<Toy> removeListItems = removeListView.getItems();
-	   if(remSerialNumSort.isSelected()) {
-   		Coordinator.sortByNum(removeListView, removeListItems);    		
-   		}
-	   if(remNameSort.isSelected()) {
-   			Coordinator.sortByName(removeListView, removeListItems);
-	   }
-   		if(remTypeSort.isSelected()) {
-   			Coordinator.sortByBrand(removeListView, removeListItems);
-   		}
 	}
-   
+    /**
+     * Event handler for the removeSearchButton.
+     * Removes a search based on the entered ID from the removeListView.
+     * If sorting options are selected, sorts the removeListView accordingly.
+     * @param event The action event triggered by clicking the removeSearchButton.
+     */
     @FXML
     void removeSearchButton(ActionEvent event) {
     	String id = "";
@@ -338,38 +375,54 @@ void addButton(ActionEvent event) {
     	//sloppy code ends
     }
 
+    /**
+     * Handles the event when the sort button is pressed.
+     * Sorts the resultsListView based on the selected sorting criteria.
+     *
+     * @param event The action event triggered by the sort button.
+     */
     @FXML
     void sortButtonPressed(ActionEvent event) {
-    	System.out.println("PRESS");
-    	List<Toy> resultsListItems = resultsListView.getItems();
     	if(serialNumSort.isSelected()) {
-    		Coordinator.sortByNum(resultsListView, resultsListItems);    		
+    		Coordinator.sortByNum(resultsListView);    		
     	}
     	if(nameSort.isSelected()) {
-    		Coordinator.sortByName(resultsListView, resultsListItems);
+    		Coordinator.sortByName(resultsListView);
     	}
     	if(typeSort.isSelected()) {
-    		Coordinator.sortByBrand(resultsListView, resultsListItems);
+    		Coordinator.sortByBrand(resultsListView);
     	}
     }
 
+    /**
+     * Handles the event when the remSortButton is pressed.
+     * Sorts the items in the removeListView based on the selected sorting criteria.
+     * If remSerialNumSort is selected, sorts the items by serial number.
+     * If remNameSort is selected, sorts the items by name.
+     * If remTypeSort is selected, sorts the items by brand.
+     *
+     * @param event the action event triggered by pressing the remSortButton
+     */
     @FXML
     void remSortButtonPressed(ActionEvent event) {
     	List<Toy> removeListItems = removeListView.getItems();
     	if(remSerialNumSort.isSelected()) {
     		Coordinator.sortByNum(removeListView, removeListItems);    		
-    		System.out.println("Num");
     	}
     	if(remNameSort.isSelected()) {
     		Coordinator.sortByName(removeListView, removeListItems);
-    		System.out.println("name");
     	}
     	if(remTypeSort.isSelected()) {
     		Coordinator.sortByBrand(removeListView, removeListItems);
-    		System.out.println("brand");
     	}
     }
     
+    /**
+     * Performs a recommendation search based on the provided age, type, and maximum price.
+     * Updates the recommendation list view with the results.
+     *
+     * @param event The action event that triggered the search.
+     */
     @FXML
     void recSearch(ActionEvent event) {
     	int age = -1;
