@@ -211,8 +211,22 @@ public class SampleController implements Initializable {
         String serialNum = serialNumInput.getText().trim();
         String name = nameInput.getText().trim();
         String type = typeInput.getText().trim();
-
-       Coordinator.search(serialNum, name, type, resultsListView);
+        if(!(serialNum.equals("") && name.equals("") && type.equals(""))) {
+        	Coordinator.search(serialNum, name, type, resultsListView);
+        } else {
+        	//sloppy again, but it works!
+        	List<Toy> resultsListItems = resultsListView.getItems();
+        	if(remSerialNumSort.isSelected()) {
+        		Coordinator.sortByNum(resultsListView, resultsListItems);    		
+        	}
+        	if(remNameSort.isSelected()) {
+        		Coordinator.sortByName(resultsListView, resultsListItems);
+        	}
+        	if(remTypeSort.isSelected()) {
+        		Coordinator.sortByBrand(resultsListView, resultsListItems);
+        	}
+        	//sloppy code ends
+        }
     }
 
     @FXML
@@ -326,14 +340,16 @@ public class SampleController implements Initializable {
 
     @FXML
     void sortButtonPressed(ActionEvent event) {
+    	System.out.println("PRESS");
+    	List<Toy> resultsListItems = resultsListView.getItems();
     	if(serialNumSort.isSelected()) {
-    		Coordinator.sortByNum(resultsListView);    		
+    		Coordinator.sortByNum(resultsListView, resultsListItems);    		
     	}
     	if(nameSort.isSelected()) {
-    		Coordinator.sortByName(resultsListView);
+    		Coordinator.sortByName(resultsListView, resultsListItems);
     	}
     	if(typeSort.isSelected()) {
-    		Coordinator.sortByBrand(resultsListView);
+    		Coordinator.sortByBrand(resultsListView, resultsListItems);
     	}
     }
 

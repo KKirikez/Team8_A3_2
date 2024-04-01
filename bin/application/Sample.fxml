@@ -116,18 +116,89 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Button layoutX="59.0" layoutY="501.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="138.0" text="Add">
+                        <Button layoutX="70.0" layoutY="501.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="138.0" text="Add">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <ComboBox layoutX="115.0" layoutY="55.0" prefWidth="150.0" />
-                        <TextField layoutX="116.0" layoutY="90.0" />
-                        <TextField layoutX="116.0" layoutY="121.0" />
-                        <TextField layoutX="116.0" layoutY="152.0" />
-                        <TextField layoutX="116.0" layoutY="183.0" />
-                        <TextField layoutX="116.0" layoutY="216.0" />
-                        <TextField layoutX="116.0" layoutY="251.0" />
+                        <ComboBox fx:id="categoryComboBox" layoutX="115.0" layoutY="55.0" prefWidth="150.0" visibleRowCount="4" />
+                        <TextField fx:id="serialNumberField" layoutX="116.0" layoutY="90.0" />
+                        <TextField fx:id="nameField" layoutX="116.0" layoutY="121.0" />
+                        <TextField fx:id="brandField" layoutX="116.0" layoutY="152.0" />
+                        <TextField fx:id="priceField" layoutX="116.0" layoutY="183.0" />
+                        <TextField fx:id="availableCountField" layoutX="116.0" layoutY="216.0" />
+                        <TextField fx:id="ageAppropriateField" layoutX="116.0" layoutY="251.0" />
+                        <Line endX="-115.0" endY="236.0" layoutX="838.0" layoutY="6.0" startX="-115.0" startY="-7.0" />
+                        <Line endX="185.0" endY="-7.0" startX="-115.0" startY="-7.0" />
+                        <Line endX="185.0" endY="-7.0" layoutX="448.0" layoutY="74.0" scaleZ="3.0" startX="-115.0" startY="-7.0" />
+                        <Label layoutX="455.0" layoutY="41.0" scaleZ="3.0" text="Animal">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="materialField" layoutX="409.0" layoutY="90.0" scaleZ="3.0" />
+                        <TextField fx:id="sizeField" layoutX="409.0" layoutY="122.0" scaleZ="3.0" />
+                        <Label layoutX="329.0" layoutY="92.0" scaleZ="3.0" text="Material">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="329.0" layoutY="124.0" scaleZ="3.0" text="Size">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Line endX="291.0" endY="-7.0" layoutX="395.0" layoutY="283.0" scaleZ="3.0" startX="-115.0" startY="-7.0" />
+                        <Label layoutX="458.0" layoutY="307.0" scaleZ="3.0" text="Figure">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Line endX="185.0" endY="-7.0" layoutX="448.0" layoutY="341.0" scaleZ="3.0" startX="-115.0" startY="-7.0" />
+                        <TextField fx:id="classificationField" layoutX="438.0" layoutY="359.0" prefHeight="25.0" prefWidth="237.0" scaleZ="3.0" />
+                        <Label layoutX="329.0" layoutY="361.0" scaleZ="3.0" text="Classification">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Line endX="-115.0" endY="282.0" layoutX="839.0" layoutY="293.0" scaleZ="3.0" startX="-115.0" startY="14.0" />
+                        <TextField fx:id="typeField" layoutX="865.0" layoutY="359.0" prefHeight="25.0" prefWidth="237.0" scaleZ="3.0" />
+                        <Label layoutX="808.0" layoutY="361.0" scaleZ="3.0" text="Type">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Line endX="185.0" endY="-7.0" layoutX="923.0" layoutY="341.0" scaleZ="3.0" startX="-115.0" startY="-7.0" />
+                        <Label layoutX="933.0" layoutY="307.0" scaleZ="3.0" text="Puzzle">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Line endX="302.0" endY="-7.0" layoutX="464.0" layoutY="282.0" scaleZ="3.0" startX="736.0" startY="-7.0" />
+                        <TextField fx:id="designersField" layoutX="884.0" layoutY="153.0" prefHeight="25.0" prefWidth="301.0" scaleZ="3.0" />
+                        <Label layoutX="808.0" layoutY="155.0" scaleZ="3.0" text="Designers">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="808.0" layoutY="124.0" scaleZ="3.0" text="Maximum Number of Players ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="maxPlayersField" layoutX="1008.0" layoutY="122.0" prefHeight="25.0" prefWidth="177.0" scaleZ="3.0" />
+                        <TextField fx:id="minPlayersField" layoutX="1008.0" layoutY="90.0" prefHeight="25.0" prefWidth="178.0" scaleZ="3.0" />
+                        <Label layoutX="808.0" layoutY="92.0" scaleZ="3.0" text="Minimum Number of Players ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="909.0" layoutY="41.0" scaleZ="3.0" text="Board Game">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Line endX="185.0" endY="-7.0" layoutX="923.0" layoutY="74.0" scaleZ="3.0" startX="-115.0" startY="-7.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
