@@ -249,30 +249,38 @@ public class SampleController implements Initializable {
         }
     }
 
+
+
 @FXML
 void addButton(ActionEvent event) {
-    //Universal    
-	String serialNumber = serialNumberField.getText();
-    String name = nameField.getText();
-    String brand = brandField.getText();
-    double price = Double.parseDouble(priceField.getText());
-    int availableCount = Integer.parseInt(availableCountField.getText());
-    int minAge = Integer.parseInt(ageAppropriateField.getText());
-    
-    //animal
-    String material = materialField.getText();
-    String size = sizeField.getText();
-    
-    //figure
-    String classification = classificationField.getText();
-    
-    //boardGame
-    int minPlayers = Integer.parseInt(minPlayersField.getText());
-    int maxPlaters = Integer.parseInt(maxPlayersField.getText());
-    String designers = designersField.getText();
-    
-    //puzzle
-    String type = typeField.getText();
+    try {
+        // Get the selected type from the ComboBox
+        String category = categoryComboBox.getValue();
+
+        // Universal attributes
+        String serialNumber = serialNumberField.getText();
+        String name = nameField.getText();
+        String brand = brandField.getText();
+        double price = Double.parseDouble(priceField.getText());
+        int availableCount = Integer.parseInt(availableCountField.getText());
+        int minAge = Integer.parseInt(ageAppropriateField.getText());
+
+        // Attributes for toy types
+        String material = materialField.getText();
+        String size = sizeField.getText();
+        String classification = classificationField.getText();
+        int minPlayers = Integer.parseInt(minPlayersField.getText());
+        int maxPlayers = Integer.parseInt(maxPlayersField.getText());
+        String designers = designersField.getText();
+        String puzzleType = typeField.getText();
+
+        Coordinator.addToy(category, serialNumber, name, brand, price, availableCount, minAge, classification, material, size, puzzleType, minPlayers, maxPlayers, designers);
+
+   
+
+    } catch (Exception e) 
+      
+
     
 }
 
