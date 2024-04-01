@@ -318,7 +318,11 @@ void addButtonPressed(ActionEvent event) throws NegativePrice, MinimumOverMax {
 	void removeButton(ActionEvent event) {
 	   Toy toRemove = null;
 	   if(toRemove == null) {
-		   toRemove = removeListView.getSelectionModel().getSelectedItem();
+		   try {
+			   toRemove = removeListView.getSelectionModel().getSelectedItem();
+		   } catch (Exception e) {
+			   
+		   }
 	   }
 	   String id = "";
 	   try {
