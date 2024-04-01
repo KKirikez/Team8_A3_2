@@ -203,6 +203,17 @@ public class SampleController implements Initializable {
         serialNumInput.clear();
         nameInput.clear();
         typeInput.clear();
+      //sloppy again, but it works!
+    	if(serialNumSort.isSelected()) {
+    		Coordinator.sortByNum(resultsListView);    		
+    	}
+    	if(nameSort.isSelected()) {
+    		Coordinator.sortByName(resultsListView);
+    	}
+    	if(typeSort.isSelected()) {
+    		Coordinator.sortByBrand(resultsListView);
+    	}
+    	//sloppy code ends
     }
 
     @FXML
@@ -215,15 +226,14 @@ public class SampleController implements Initializable {
         	Coordinator.search(serialNum, name, type, resultsListView);
         } else {
         	//sloppy again, but it works!
-        	List<Toy> resultsListItems = resultsListView.getItems();
         	if(remSerialNumSort.isSelected()) {
-        		Coordinator.sortByNum(resultsListView, resultsListItems);    		
+        		Coordinator.sortByNum(resultsListView);    		
         	}
         	if(remNameSort.isSelected()) {
-        		Coordinator.sortByName(resultsListView, resultsListItems);
+        		Coordinator.sortByName(resultsListView);
         	}
         	if(remTypeSort.isSelected()) {
-        		Coordinator.sortByBrand(resultsListView, resultsListItems);
+        		Coordinator.sortByBrand(resultsListView);
         	}
         	//sloppy code ends
         }
