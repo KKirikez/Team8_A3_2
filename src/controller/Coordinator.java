@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import exceptions.MinimumOverMax;
 import exceptions.NegativePrice;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import view.ToyStoreMenu;
 import java.io.File;
@@ -188,10 +189,13 @@ public class Coordinator {
         }
 
         int newAvailableCount = toyToPurchase.getAvailableCount() - 1;
-        toyToPurchase.setAvailableCount(newAvailableCount);
+        if(newAvailableCount > -1) {
+        	toyToPurchase.setAvailableCount(newAvailableCount);
+        }  
 
         // Remove the toy from the list if it's no longer available
         if (newAvailableCount <= 0) {
+        	toys.remove(toyToPurchase);
         }
     }
 
@@ -219,20 +223,22 @@ public static void addToy(String type, String serialNumber, String name, String 
     switch (type) {
         case "Figure":
             toy = new Figures(serialNumber, name, brand, price, availableCount, ageAppropriate, classification);
-            System.out.println("Added figure");
+//           ToyStoreMenu.drawAddError("Added Figure!", addError);
             break;
         case "Animal":
             toy = new Animals(serialNumber, name, brand, price, availableCount, ageAppropriate, material, size);
-            System.out.println("Added animal");
+//            ToyStoreMenu.drawAddError("Added Animal!", addError);
             break;
         case "Puzzle":
             toy = new Puzzles(serialNumber, name, brand, price, availableCount, ageAppropriate, puzzleType);
+//            ToyStoreMenu.drawAddError("Added Puzzle!", addError);
             break;
         case "Board Game":
             if (minPlayers > maxPlayers) {
                 throw new MinimumOverMax();
             }
             toy = new Boardgames(serialNumber, name, brand, price, availableCount, ageAppropriate, minPlayers, maxPlayers, designers);
+//            ToyStoreMenu.drawAddError("Added Board Game!", addError);
             break;
         default:
             throw new IllegalArgumentException("Invalid toy type based on serial number.");
