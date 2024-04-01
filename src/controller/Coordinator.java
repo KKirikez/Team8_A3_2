@@ -337,36 +337,6 @@ public static void removeToy(String serialNumber, String id, ListView<Toy> remov
     removeSearch(id, removeListView);
 }
 
-
-private static void purchaseToy(String target, String parameterType, Scanner scanner) {
-    Toy toyToPurchase = null;
-    for (Toy toy : toys) {
-        if (compare(toy, target, parameterType)) {
-            toyToPurchase = toy;
-            break;
-        }
-    }
-
-    if (toyToPurchase != null) {
-        System.out.println("Toy found: " + toyToPurchase.toString());
-        System.out.println("Do you want to purchase this toy? (yes/no): ");
-
-        String response = scanner.nextLine().trim().toLowerCase();
-        if (response.equals("yes")) {
-            System.out.println("The Transaction Successfully Terminated!");
-            toys.remove(toyToPurchase);
-            toyToPurchase.setAvailableCount(toyToPurchase.getAvailableCount() - 1);
-        } else {
-            System.out.println("Transaction cancelled. You can continue browsing our toys.");
-        }
-    } else {
-        System.out.println("Toy not found. Please enter a valid input.");
-    }
-
-    System.out.println("Press Enter to continue...");
-    scanner.nextLine();
-}
-
     private static boolean compare(Toy toy, String target, String parameterType) {
         switch (parameterType) {
             case "Serial":
