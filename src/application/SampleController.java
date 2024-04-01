@@ -126,8 +126,8 @@ public class SampleController implements Initializable {
     @FXML
     private Button removeSearchButton;
 
-    @FXML
-    private Label removeYouSure;
+//    @FXML
+//    private Label removeYouSure;
 
     @FXML
     private ListView<Toy> resultsListView;
